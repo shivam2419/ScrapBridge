@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load static %}
+<head>
+    {% block title %}RECYCLE{% endblock title %}
+    {% block css %}{% static 'recycle_main.css' %}{% endblock css %}
+</head>
+
+<body>
+    {% block body %}
+    <div class="recycleform">
+        <h2> {{ item.organisation_name|upper }}</h2>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% comment %} <div class="row-1">
+                <div class="col-1">
+                    <label for="">Organisation Id</label>
+                    <br>
+                    <select name="id" id="">
+                        <option value="">--Select id--</option>
+                        {% for items in data %}
+                        <option value="{{ items.organisation_id }}">    
+                            {{items.organisation_id}}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-2">
+                    <label for="">Organisation Name</label>
+                    <br>
+                    <select name="organisation_name" id="">
+                        <option value="">--Select name--</option>
+                        {% for items in data %}
+                        <option value="{{ items.organisation_name }}">
+                            {{items.organisation_name}}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div> {% endcomment %}
+            <div class="row-1">
+                <div class="col-1">
+                    <label for="">Select item type*</label>
+                    <br>
+                    <select name="item_type" id="brandSelect" onchange="updateModelOptions()" required>
+                        <option value="" selected>Select type</option>
+                        <option value="paper">Paper</option>
+                        <option value="iron">Iron</option>
+                        <option value="copper">Copper</option>
+                        <option value="iron">E-waste</option>
+                        <option value="plastic">Plastic</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <label for="">Select Date of pickup*</label>
+                    <br>
+                    <input type="date" name="date" required>
+                </div>
+            </div>
+            <div class="row-2">
+                <div class="col-1">
+                    <label for="">Phone number*</label>
+                    <br>
+                    <input type="text" placeholder="0000" name="pnum" required>
+                </div>
+                <div class="col-2">
+                    <label for="">Upload items image</label>
+                    <br>
+                    <input type="file" name="image" required>
+                </div>
+            </div>
+            
+            <input id="latitude" name = "latitude" hidden>
+            <input id="longitude" name = "longitude" hidden>
+
+            <input type="submit" value="SUBMIT" id="recycle-btn">
+        </form>
+    </div>
+    {% endblock body %}
+    {% block script %}
+        // Function to get the user's location
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, handleError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Function to show the user's position
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            document.getElementById("latitude").value = `${latitude}`;
+            document.getElementById("longitude").value = `${longitude}`;
+        }
+
+        // Function to handle errors
+        function handleError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("Providing location is important for this functionality.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+
+        // Automatically request location when the page loads
+        window.onload = getLocation;
+    {% endblock script %}
+</body>

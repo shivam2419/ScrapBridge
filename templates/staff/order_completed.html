@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Orders</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        h1{
+            text-align: center;
+        }
+        table{
+            margin: auto;
+            text-align: left;
+        }
+        th{
+            background-color: black;
+            padding: 8px;
+            color: white;
+        }
+        td{
+            padding: 8px;
+            border: 1px solid gray;
+        }
+        td a{
+            width: 50px;
+            text-decoration: none;
+            color: black;
+        }
+        td a img{
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            margin-bottom: -10px;
+        }
+        @media screen and (max-width: 800px) {
+            h1{
+                text-align: left;
+            }
+            th{
+                padding: auto;
+                font-size: auto;
+                width: auto;
+            }
+            td{
+                padding : auto;
+                font-size: auto;
+                width: auto;
+                height: auto;
+                overflow: hidden;
+            }
+            td a{
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Pending Orders : </h1>
+    <table>
+        <tr>
+            <th>Name : </th>
+            <th>Brand : </th>
+            <th>Model : </th>
+            <th>Location : </th>
+            <th>Delievery type : </th>
+            <th>Pay Amount</th>
+        </tr>
+    {% for items in data %}
+    <tr>
+        <td>{{items.name}}</td>
+        <td>{{items.brand}}</td>
+        <td>{{items.model}}</td>
+        <td>{{items.location}}</td>
+        <td>{{items.facility}}</td>
+        <td>PAID</td>
+        <br>
+    </tr>
+    {% endfor %}
+    
+</table>
+</body>
+</html>

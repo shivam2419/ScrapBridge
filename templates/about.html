@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}ABOUT{% endblock title %}
+{% block css %}../static/index.css{% endblock css %}
+{% block body %}
+{% load static %}
+<div class="about" id="about">
+    <p>-About Scrap</p>
+    <h1>Making a revolution in Scrap</h1>
+    <br><br>
+    <div class="about-area">
+        <div class="about-left">
+            <p>
+                Welcome to ScrapBridge, your dedicated partner in tackling the global Scrap crisis. Our
+                mission is to promote sustainable electronic waste management practices, raise awareness about the
+                environmental and health impacts of Scrap, and provide practical solutions for responsible disposal
+                and recycling of electronic devices.
+                <br><br>
+                <h3>Our Mission</h3>
+
+                At ScrapBridge, we are committed to:
+                <b>Educating</b> the public about the dangers of improper Scrap disposal and the benefits of recycling.
+            <b>Facilitating</b> the safe and responsible recycling of electronic devices through accessible and
+                convenient recycling programs.
+            <b>Advocating</b> for stronger regulations and policies to ensure sustainable Scrap management and
+                reduce environmental impact.
+                <br><br>
+                <h3>What We Do</h3>
+
+                <b>Awareness Campaigns</b>: We conduct awareness campaigns to inform individuals and communities about
+                the importance of proper Scrap disposal and the harmful effects of Scrap on the environment and
+                human health.<br>
+                <b>Recycling Programs</b>: We partner with certified Scrap recycling centers to provide easy and
+                efficient recycling solutions. Our programs ensure that valuable materials are recovered and hazardous
+                substances are safely managed.<br>
+                <b>Community Engagement</b>: We work closely with local communities, schools, and organizations to
+                promote Scrap recycling initiatives and encourage participation in our programs.<br>
+                <b>Policy Advocacy</b>: We advocate for comprehensive Scrap management policies at local, national, and
+                international levels to drive systemic change and improve recycling rates.
+                <br><br>
+                <h3>Our Vision</h3>
+
+                We envision a world where electronic waste is no longer a threat to our environment and health. Through
+                collective efforts and responsible practices, we aim to create a sustainable future where electronics
+                are designed, used, and disposed of in ways that minimize their environmental footprint.
+                <br><br>
+                <h3>Get Involved</h3>
+
+                Join us in our mission to combat the Scrap crisis. Whether you are an individual looking to recycle
+                your old devices, a business seeking sustainable Scrap management solutions, or a community group
+                interested in partnering with us, there are many ways to get involved and make a difference.
+
+                <b>Donate Your Electronics</b>: Bring your old electronics to one of our recycling centers or participate in our take-back programs.<br>
+                <b>Volunteer</b>: Help us spread the word and assist with our awareness campaigns and community events.<br>
+                <b>Support Our Work</b>: Consider making a donation to support our initiatives and expand our reach.
+                <br>
+                Together, we can make a significant impact on reducing Scrap and protecting our planet for future
+                generations. Thank you for being part of the solution!
+            </p>
+            <br>
+            <div class="btns">
+                <a href="{% url "contact" %}" id="contact-btn">CONTACT US</a>
+                <a href="{% url "recycle" %}" id="recycle-btn">RECYCLE SERVICES</a>
+            </div>
+        </div>
+        <div class="about-right" data-aos="fade-left" data-aos-easing="linear" data-aos-duration="500">
+            <img src={% static "ewaste.jpg" %} alt="..">
+        </div>
+    </div>
+
+</div>
+{% endblock body %}

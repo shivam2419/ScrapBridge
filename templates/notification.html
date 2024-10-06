@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% block body %}
+    <style>
+        nav {
+            display: none;
+        }
+
+        .notification-container {
+            text-align: center;
+            margin: 3%;
+        }
+
+        .notification-container h1 {
+            text-align: left;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        .notification-container table{
+            margin: auto;
+        }
+        .notification-container th{
+            background-color: black;
+            color: white;
+            padding: 8px;
+        }
+        .notification-container td {
+            padding: 5px;
+        }
+    </style>
+    <div class="notification-container">
+        <h1>Notifications : </h1>
+        <br><br>
+        <table>
+            {% for items in data %}
+            {% if items.status == 'True' %}
+            <tr>
+                <td style="
+                background-color: rgb(146, 210, 255);">Request Accepted : </td>
+                <td style="
+                background-color: rgb(138, 255, 138);">
+                    {{items.message}}
+                </td>
+            </tr>
+
+            {% else %}
+            <tr>
+                <td style="
+                background-color: rgb(146, 210, 255);">Request Rejected : </td>
+                <td style="
+                background-color: rgb(255, 105, 105); color: white;">
+                    {{items.message}}
+                </td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+    </div>
+
+    {% endblock body %}
+</body>
+
+</html>

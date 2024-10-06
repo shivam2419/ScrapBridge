@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}PROFILE{% endblock title %}</title>
+    {% block css %}../static/profile.css{% endblock css %}
+</head>
+<body>
+    {% block body %}
+    {% if user.is_authenticated %}
+    <div class="profile-container">
+        <div class="img">
+            <img src="https://media.istockphoto.com/id/1327592506/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-man.jpg?s=612x612&w=0&k=20&c=BpR0FVaEa5F24GIw7K8nMWiiGmbb8qmhfkpXcp1dhQg=" alt="">
+            <h2>{{user.username|upper}}</h2>
+        </div>
+        <label for="">Upload Image : </label>
+        <input type="file">
+        <div class="info">
+            <div class="form">
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="">
+                            Last login : {{ user.last_login }}
+                        </label>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="id_username">Username:</label>
+                        {{ form.username }}
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="id_password">Password:</label>
+                        {{ form.password }}
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="id_email">Email:</label>
+                        {{ form.email }}
+                    </div>
+                    <br>
+                    <button type="submit" id="done">Update</button>
+                </form>
+            
+            </div>
+        </div>
+    </div>
+
+    
+    {% else %}
+    <a href="{% url 'index' %}">You are not valid user</a>
+    {% endif %}
+    {% endblock body %}
+</body>
+</html>

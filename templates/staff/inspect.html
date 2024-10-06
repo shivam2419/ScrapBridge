@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}DETAILS{% endblock title %}
+    {% block css %}{% static "inspect.css" %}{% endblock css %}
+    
+
+</head>
+
+<body>
+    {% block body %}
+    
+    <div class="container">
+        <form action="" method="POST" class="container_form">
+            <div class="user">
+                <img src="/static/owner2.jpg" alt="">
+                <h2>{{recycle_data.name | upper}}</h2>
+            </div>
+            <br><br>
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th>
+                        Content
+                    </th>
+                    <th>
+                        Details
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        Brand :
+                    </td>
+                    <td>
+                        {{recycle_data.item_type}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Product date :
+                    </td>
+                    <td>
+                        {{recycle_data.date}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Address :
+                    </td>
+                    <td>
+                        <p class="lat" style="display: none;">{{ latitude }}</p>
+                        <p class="long" style="display: none;">{{ longitude }}</p>
+                        {{recycle_data.location}}
+                    </td>
+                </tr>
+            </table>
+            <br>
+            <h2>Item image  </h2><p> (Click to enlarge)</p>
+            <br>
+            <img src="{{ recycle_data.image.url }}" alt="" style="height: 200px; width: 400px; cursor: pointer;" id="myImage">
+            <br>
+            
+            <button>
+                <label for="">Accept Request : </label>
+                <a href="">
+                    <img src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA0L2pvYjc2NS0yMC5wbmc.png"
+                        alt="Accept button">
+                </a>
+            </button>
+                <label for="">Reject Request : </label>
+                <a href="{% url "rejectOrder" recycle_data.user_id %}">
+                    <img src="https://t3.ftcdn.net/jpg/05/38/50/06/360_F_538500677_KHHga3rUks6ftokeDbqE1qwpjpBvDdHl.jpg"
+                        alt="Reject button">
+                </a>
+
+        </form>
+        <!-- The Modal -->
+        
+    <div id="mapid"></div>
+    </div>
+    <div id="myModal" class="modal">
+        <span class="close" id="closeBtn"> Close X </span>
+        <br>
+        <img class="modal-content" id="modalImage">
+    </div>
+    
+    <script>
+        // Get the modal and image elements
+        const modal = document.getElementById("myModal");
+        const img = document.getElementById("myImage");
+        const modalImg = document.getElementById("modalImage");
+        const closeBtn = document.getElementById("closeBtn");
+    
+        // When the user clicks on the image, open the modal and display the enlarged image
+        img.onclick = function() {
+            modal.style.display = "block";
+            img.style.display = "none";
+            modalImg.src = this.src; // Set the source of the modal image to the thumbnail
+        }
+    
+        // When the user clicks on the close button, close the modal
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+            img.style.display = "block";
+        }
+    
+        // Close the modal if the user clicks anywhere outside the modal image
+        window.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+                img.style.display = "block";
+            }
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let curr_lat, curr_long;
+            getLocation();
+            
+            var latElements = document.querySelectorAll(".lat");
+            var longElements = document.querySelectorAll(".long");
+            var my_lat, my_long;
+            
+            var myLat = Array.from(latElements).map(el => parseFloat(el.innerHTML));
+            var myLong = Array.from(longElements).map(el => parseFloat(el.innerHTML));
+    
+            // Get the first valid lat/long for the destination
+            for (var i = 0; i < myLat.length; i++) {
+                if (!isNaN(myLat[i]) && !isNaN(myLong[i])) {
+                    my_lat = myLat[i]; // Adjust as needed
+                    my_long = myLong[i]; // Adjust as needed
+                    break; // Take the first valid coordinates
+                }
+            }
+            const mymap = L.map('mapid').setView([28.6139, 77.2090], 9);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                zoom: 9,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(mymap);
+    
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition, showError);
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
+            
+            function showPosition(position) {
+                curr_lat = position.coords.latitude;
+                curr_long = position.coords.longitude;
+    
+                mymap.setView([curr_lat, curr_long], 5);
+                const startMarker = L.marker([curr_lat, curr_long]).addTo(mymap).bindPopup("Start Location").openPopup();
+    
+                if (my_lat && my_long) {
+                    const destMarker = L.marker([my_lat, my_long]).addTo(mymap).bindPopup("Destination Location").openPopup();
+    
+                    // Create a route
+                    L.Routing.control({
+                        waypoints: [
+                            L.latLng(curr_lat, curr_long),
+                            L.latLng(my_lat, my_long)
+                        ],
+                        routeWhileDragging: true
+                    }).addTo(mymap);
+                } else {
+                    console.error("Destination coordinates are not defined.");
+                }
+            }
+    
+            function showError(error) {
+                console.error("Geolocation error:", error);
+            }
+        });
+    </script>
+    
+    {% endblock body %}
+</body>
+
+</html>

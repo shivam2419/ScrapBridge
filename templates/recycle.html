@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}RECYCLE{% endblock title %}
+{% block css %}../static/recycle.css{% endblock css %}
+<body>
+{% block body %}
+    <div class="recycle-container">
+        <h1>Recycle Center</h1>
+        <div class="recycle-items">
+            <div class="row-1">
+                <div class="laptop" id="card">
+                    <div class="img">
+                        <img src="https://img.freepik.com/free-vector/screen-tv-mockup_1053-198.jpg?w=740&t=st=1714900705~exp=1714901305~hmac=f3d6b25e941611aeff04a82e6ab35e7afa6bbe649ed7f4bc1269dae0d4bc28d7" alt="">
+                    </div>
+                    <h3>Laptop Recycling:</h3>
+                    <p style="margin-left : 10px">
+                        <b>Recycle Your Old Laptop Responsibly</b>
+                        Do you have an old laptop sitting around gathering dust? Don't let it go to waste! Recycle it with us and contribute to a greener planet.
+                        <br>
+                        At <b>E-Wasteguard</b>, we offer a hassle-free solution to recycle your old laptops. Whether it's broken, outdated, or simply unused, we'll ensure it's disposed of responsibly.</p>
+                    <a href="{% url 'recycle_main' 'laptop'%}">Recycle Now</a>
+                </div>
+                <div class="smartphone" id="card">
+                    <div class="img">
+                        <img src="https://img.freepik.com/free-vector/new-modern-realistic-front-view-black-iphone-mockup-isolated-white-mobile-template-vector_90220-957.jpg?t=st=1714901043~exp=1714904643~hmac=5f5fea98acae8133a57d9b01c68d092079481f2eacfacc0314af19a50ab43c96&w=740" alt="">
+                    </div>
+                    <h3>SmartPhone Recycling:</h3>
+                    <p style="margin-left : 10px">
+                        <b>Recycle Your Old smartphone Responsibly</b>
+                        Do you have an old smartphone sitting around gathering dust? Don't let it go to waste! Recycle it with us and contribute to a greener planet.
+                        <br>
+                        At <b>E-Wasteguard</b>, we offer a hassle-free solution to recycle your old smartphones. Whether it's broken, outdated, or simply unused, we'll ensure it's disposed of responsibly.</p>
+                    <a href="{% url 'recycle_main' 'smartphone'%}">Recycle Now</a>
+                </div>
+                <div class="accessories" id="card">
+                    <div class="img">
+                        <img src="https://img.freepik.com/free-vector/illustration-headphones-icon_53876-5571.jpg?t=st=1714901394~exp=1714904994~hmac=5dc3881c31927a3f714d3d9c7a10e67934cec0abd45096ebebfbd286d403e208&w=740" alt="x">
+                    </div>
+                    <h3>Audio Devices Recycling:</h3>
+                    <p style="margin-left : 10px">
+                        <b>Recycle Your Old audio device Responsibly</b>
+                        Do you have an old audio device sitting around gathering dust? Don't let it go to waste! Recycle it with us and contribute to a greener planet.
+                        <br>
+                        At <b>E-Wasteguard</b>, we offer a hassle-free solution to recycle your old audio devices. Whether it's broken, outdated, or simply unused, we'll ensure it's disposed of responsibly.</p>
+                    <a href="{% url 'recycle_main' 'accessories'%}">Recycle Now</a>
+                </div>
+            </div>
+            <div class="row-2">
+                <div class="refrigirator" id="card">
+                    <div class="img">
+                        <img src="https://img.freepik.com/free-vector/refrigerator-with-lots-food_1308-94559.jpg?t=st=1714901493~exp=1714905093~hmac=2477b1d0f1060a27438a0d7a35a806a53a2fbe67ff5ec04110ffbc99f6ce669a&w=740" alt="">
+
+                    </div>
+                    <h3>Refrigerator Recycling:</h3>
+                    <p style="margin-left : 10px">
+                        <b>Give Your Old Refrigerator a New Purpose</b>
+                        Do you have an old Refrigerator sitting around gathering dust? Don't let it go to waste! Recycle it with us and contribute to a greener planet.
+                        <br>
+                        At <b>E-Wasteguard</b>, we offer a hassle-free solution to recycle your old Refrigerator. Whether it's broken, outdated, or simply unused, we'll ensure it's disposed of responsibly.</p>
+                    <a href="{% url 'recycle_main' 'refrigirator'%}">Recycle Now</a>
+                </div>
+                <div class="television" id="card">
+                    <div class="img">
+
+                        <img src="https://img.freepik.com/premium-vector/vector-smart-tv-screen-mock-up_47649-465.jpg?w=740" alt="">
+                    </div>
+                    <h3>Television Recycling:</h3>
+                    <p style="margin-left : 10px">
+                        <b>Upgrade Responsibly: Recycle Your Old TV Set</b>
+                        Do you have an old Television sitting around gathering dust? Don't let it go to waste! Recycle it with us and contribute to a greener planet.
+                        <br>
+                        At <b>E-Wasteguard</b>, we offer a hassle-free solution to recycle your old Television. Whether it's broken, outdated, or simply unused, we'll ensure it's disposed of responsibly.</p>
+                    <a href="{% url 'recycle_main' 'television'%}">Recycle Now</a>
+                </div>
+                <div class="other" id="card">
+                    <div class="img">
+                        <img src="https://img.freepik.com/premium-photo/washing-machine-isolated-white_85869-6288.jpg?w=360" alt="">
+
+                    </div>
+                    <h3>Other</h3>
+                    <p>Electronics contain hazardous materials such as lead and mercury. By recycling your laptop, you're preventing these toxins from seeping into our ecosystem, safeguarding our planet for future generations.</p>
+                    <a href="{% url 'recycle_main' 'Item'%}">Recycle Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+</body>
+{% block script %}{% endblock script %}

@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/facility.css">
+    {% block css %}../static/facility.css{% endblock css %}
+    {% block title %}E-FACILITY{% endblock title %}
+</head>
+
+<body>
+    {% block body %}
+    <div class="row">
+        <div class="col-1">
+            {% if search_query %}
+            <h2>Search Results for "{{ search_query }}"</h2>
+            {% else %}
+            <h1>All Available Slots</h1>
+            {% endif %}
+            <form action="" method="GET">
+                <input type="text" placeholder="Search your Shopper" id="q" name="q">
+                <input type="submit" value="Search" id="search-btn">
+            </form>
+            {% for items in rooms %}
+            <div class="facility-card">
+                <img src="{{ items.image.url }}" alt="Facility Image"
+                     style="border-radius: 50%; height: 50px; margin-right: 10px; float: left;">
+                <h3 class="org-name">{{ items.organisation_name|upper }} (Id: {{ items.organisation_id|lower }})</h3>
+                <br>
+                <p class="address" style="margin-top: 20px;">
+                    ADDRESS: {{ items.street }}, {{ items.city }}, {{ items.state }}, {{ items.zipcode }}
+                </p>
+                <p class="lat" style="display: none;">{{ items.latitude }}</p>
+                <p class="long" style="display: none;">{{ items.longitude }}</p>
+                <br>
+                <p class="contact">
+                    Contact: {{ items.phone }}<br>
+                    Time: 23:12 A.M<br>
+                    Distance: 12.67 KM
+                </p>
+                <a href="{% url 'recycle_main' items.organisation_id %}">Book Recycling</a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-2">
+            <div id="mapid"></div>
+        </div>
+    </div>
+    {% endblock body %}
+    
+    {% block script %}
+        document.addEventListener('DOMContentLoaded', function () {
+            // Gather data from the document
+            var latElements = document.querySelectorAll(".lat");
+            var longElements = document.querySelectorAll(".long");
+            var orgNameElements = document.querySelectorAll(".org-name");
+
+            var myLat = Array.from(latElements).map(el => parseFloat(el.innerHTML));
+            var myLong = Array.from(longElements).map(el => parseFloat(el.innerHTML));
+            var orgNameList = Array.from(orgNameElements).map(el => el.innerHTML);
+
+            const mymap = L.map('mapid', {
+                center: [20, 80],
+                zoom: 5,
+                layers: [
+                    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    })
+                ]
+            });
+
+            // Add markers to the map
+            for (var i = 0; i < myLat.length; i++) {
+                if (!isNaN(myLat[i]) && !isNaN(myLong[i])) {
+                    const marker = L.marker([myLat[i], myLong[i]], {
+                        title: orgNameList[i]
+                    }).addTo(mymap);
+                    marker.bindPopup(orgNameList[i]);
+                }
+            }
+
+            mymap.on('click', function (e) {
+                L.Routing.control({
+                    waypoints: [
+                        L.latLng(28.47541284276062, 77.50047899775969),
+                        L.latLng(e.latlng.lat, e.latlng.lng)
+                    ]
+                }).addTo(mymap);
+            });
+        });
+
+        // Get current location
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            alert("Latitude: " + latitude + "\nLongitude: " + longitude);
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+    {% endblock script %}
+</body>
+
+</html>

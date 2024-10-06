@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% if messages %}
+            {% for msg in messages %}
+            {{msg}}
+            {% endfor %}
+            {% endif %}
+            <br>
+            <label for="">You : </label>
+            <input type="text" name="" value="{{you}}">
+            <br><br>
+            <label for="">User : </label>
+            <input type="text" name="user" value="{{user}}">
+            <br><br>
+            <label for="">Amount : </label>
+            <input type="number" placeholder="Enter amount*" name="amount">
+            <br><br>
+            <button type="submit" value="Pay" onclick="done">Pay</button>
+        </form>
+
+    </div>
+    <script>
+        function done(){
+        let defaultMerchantConfiguration = {
+            "root": "",
+            "style": {
+                "bodyColor": "",
+                "themeBackgroundColor": "",
+                "themeColor": "",
+                "headerBackgroundColor": "",
+                "headerColor": "",
+                "errorColor": "",
+                "successColor": ""
+            },
+            "flow": "DEFAULT",
+            "data": {
+                "orderId": "",
+                "token": "",
+                "tokenType": "TXN_TOKEN",
+                "amount": "123",
+                "userDetail": {
+                    "mobileNumber": "9953214480",
+                    "name": "Shivam Sharma"
+                }
+            },
+            "merchant": {
+                "mid": "Peuhrb55767587447023",
+                "name": "",
+                "redirect": true
+            },
+            "labels": {},
+            "payMode": {
+                "labels": {},
+                "filter": [],
+                "order": []
+            },
+            "handler": {}
+        };
+    }
+    </script>
+</body>
+
+</html>

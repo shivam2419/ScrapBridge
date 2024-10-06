@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Status</title>
+</head>
+<body>
+        <style>
+            .container{
+                text-align: center;
+                margin: 5%;
+            }
+        </style>
+        <div class="container">
+            <button style="background-color: rgb(255, 59, 59); padding: 8px; border: none;"><a href="{% url 'orderpending' %}" style="text-decoration: none; color: white;">Pending Order</a></button>
+            <button style="background-color: rgb(110, 255, 110); padding: 8px; border: none;"><a href="{% url 'ordercompleted' %}" style="text-decoration: none; color: white;">Completed Order</a></button>
+        </div>
+    
+</body>
+</html>

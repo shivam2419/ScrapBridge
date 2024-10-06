@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+<head>
+    {% block css %}../static/index.css{% endblock css %}
+    {% block title %}HOME{% endblock title %}
+</head>
+
+<body>
+    {% block body %}
+    <div class="content">
+        <div class="content-left">
+            <p>-Welcome to ScrapBridge</p>
+            <h1>"Empowering Communities, <br>Sustaining futures: Your Guide <br>to Responsible Waste Disposal"</h1>
+            <h1 style="color: #4e35f0;" data-aos="fade-right"
+            data-aos-easing="linear"
+            data-aos-duration="1000">Waste Facility Locator</h1>
+
+            <h3>ScrapBridge : Transforming Waste management. Find Waste facilities <br>effortlessly with our platform
+            </h3>
+            <br>
+            <button><a href="{% url "recycle" %}">PRICE LIST</a></button>
+            <button><a href="{% url "e-facility"%}">LOCATE COLLECTOR</a></button>
+            
+        </div>
+        <div class="content-right">
+            <img src="../static/community.jpg" alt="">
+        </div>
+    </div>
+    <img src="https://t4.ftcdn.net/jpg/03/08/43/19/360_F_308431972_g5fuiXwgOZpDCMFQougq13hgSaQVHVro.jpg" alt=""
+        id="bot-img" onclick="openBot()">
+
+    <iframe width="350" height="430" allow="microphone;"
+        src="https://console.dialogflow.com/api-client/demo/embedded/2c0a3a81-ff6c-40f3-8aa0-5fc3254e6332" id="bot"
+        style="display: none;"></iframe>
+    <div class="about" id="about">
+        <p>-About ScrapBridge</p>
+        <h1>Making a revolution in Trash</h1>
+        <br><br>
+        <div class="about-area">
+            <div class="about-left">
+                <p>
+                    Welcome to ScrapBridge, your dedicated partner in tackling the global e-waste crisis. Our
+                    mission is to promote sustainable waste management practices, raise awareness about the
+                    environmental and health impacts of e-waste, and provide practical solutions for responsible disposal
+                    and recycling of electronic devices.
+                    <br><br>
+                    <h3>Our Mission</h3>
+    
+                    At ScrapBridge, we are committed to:
+                    <b>Educating</b> the public about the dangers of improper waste disposal and the benefits of recycling.
+                <b>Facilitating</b> the safe and responsible recycling of electronic devices through accessible and
+                    convenient recycling programs.
+                <b>Advocating</b> for stronger regulations and policies to ensure sustainable e-waste management and
+                    reduce environmental impact...<a href="about/">Read more</a>
+                </p>
+                 <br><br>
+                <div class="btns">
+                    <a href="{% url "contact" %}" id="contact-btn">CONTACT US</a>
+                    <a href="{% url "recycle" %}" id="recycle-btn">RECYCLE SERVICES</a>
+                </div>
+                
+            </div>
+            <div class="about-right" data-aos="fade-left"
+            data-aos-easing="linear"
+            data-aos-duration="500">
+                <img src="../static/ewaste.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    
+    <div class="points">
+        <div class="points-part1">
+            <div class="points-card">
+                <div class="points-square">
+                    <h2>01</h2>
+                </div>
+                <div class="points-content">
+                    <h2>Waste Collection</h2>
+                    <p>A network of certified waste collection facilites which help in ensuring responsible Disposal.</p>
+                </div>
+            </div>
+            <div class="points-card">
+                <div class="points-square">
+                    <h2>02</h2>
+                </div>
+                <div class="points-content">
+                    <h2>Educational Resources</h2>
+                    <p>A network of certified e-waste collection facilites which help in ensuring responsible Disposal.</p>
+                </div>
+            </div>
+            <div class="points-card">
+                <div class="points-square">
+                    <h2>03</h2>
+                </div>
+                <div class="points-content">
+                    <h2>User-Friendly Interface</h2>
+                    <p>A network of certified e-waste collection facilites which help in ensuring responsible Disposal.</p>
+                </div>
+            </div>
+        </div>
+        <div class="points-part1">
+            <div class="points-card">
+                <div class="points-square">
+                    <h2>04</h2>
+                </div>
+                <div class="points-content">
+                    <h2>Chatbot</h2>
+                    <p>An intelligent chatbot responsible for FAQs and educational resources.</p>
+                </div>
+            </div>
+            <div class="points-card">
+                <div class="points-square">
+                    <h2>05</h2>
+                </div>
+                <div class="points-content">
+                    <h2>Streamlined Booking Sytem</h2>
+                    <p>Efficient booking system with a credit mechanism helps in encouraging responsible disposal practices.</p>
+                </div>
+            </div>
+            <div class="points-card">
+                <div class="points-square">
+                    <h2>06</h2>
+                </div>
+                <div class="points-content">
+                    <h2>Facility Management Dashboard</h2>
+                    <p>Comprehensive dashboard for facility owners to manage bookings abd credits seamlessly.</p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="faq-section"> 
+        <h2>Frequently Asked Questions</h2>
+        <ul class="faq">
+        {% for question in questions %}
+        <li>
+            <div class="q">
+                <span class="arrow"></span>
+                <span style="
+                background-color: white;">{{question.questions}}</span>
+            </div>
+            <div class="a">
+                <p>
+                    {{question.answers}}
+                </p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    </div>
+    {% endblock body %}
+    {% block script %}
+        const q = document.querySelectorAll('.q');
+        const a = document.querySelectorAll('.a');
+        const arr = document.querySelectorAll('.arrow');
+
+        for(let i=0; i<q.length; i++){
+            q[i].addEventListener('click', ()=>{
+                a[i].classList.toggle('a-opened');
+
+                arr[i].classList.toggle('arrow-rotated');
+            })
+        }
+        function openBot(){
+            const bot = document.getElementById('bot');
+            const botImg = document.getElementById('bot-img');
+            bot.style.display = 'block';
+            botImg.style.display = 'none';
+        }
+    {% endblock script %}
+</body>

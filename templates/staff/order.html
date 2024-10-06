@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Center the table on the page */
+        h1{
+            font-size: 4rem;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            letter-spacing: 0.5rem;
+        }
+        h2{
+            margin-left:5%;
+        }
+        .table-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Adjust height as needed */
+        }
+
+        /* Style the table */
+        .my-table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .my-table th,
+        .my-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .my-table th {
+            background-color: #f2f2f2;
+        }
+        button{
+            background-color: blue;
+            padding: 8px;
+            border: none;
+            margin-right: 10px;
+        }
+        button:hover{
+            scale: 1.1;
+        }
+        button a{
+            text-decoration: none;
+            color: white
+        }
+        @media screen and (max-width: 800px) {
+            h1{
+                font-size : 2rem;
+            }
+            h2{
+                margin-left: 1%;
+            }
+            .my-table th,
+            .my-table td {
+                padding: 8px;
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+            .my-table{
+                margin: 10px;
+            }
+            button{
+                margin: 10px;
+                width: 70px;
+            }
+            button a{
+                font-size: 12px;
+            }
+            @media screen and (max-width: 800px) {
+            .my-table td {
+                padding: 5px;
+                font-size: 13px
+            }
+            
+            button{
+                margin: 5px;
+                width: 60px;
+            }
+            button a{
+                font-size: 10px
+            }
+            
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1>
+            {% for data in user %}
+                {{data.organisation_name | upper}}
+            {% endfor %}
+        </h1>
+    </center>
+    <h2>Orders :</h2>
+    <div class="table-container">
+        <table class="my-table">
+            <thead>
+                <tr>
+                    <th>S.No</th>
+                    <th>Item type</th>
+                    <th>Date</th>
+                    <th>Phone number</th>
+                    <th>Status</th>
+                    <!-- Add more column headers as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for index, items in items %}
+                <tr>
+                    <td>
+                        {{index}}
+                    </td>
+                    <td>
+                        {{items.item_type}}
+                        
+                    </td>
+                    <td>
+                        {{items.date}}
+                    </td>
+                    <td>
+
+                        {{items.phone}}
+                    </td>
+                    <td>
+                        <button><a href="">Direction</a></button>
+                        <button><a href="{% url 'inspect' items.id %}">Inspect</a></button>
+                    </td>
+                </tr>
+                {% endfor %}
+                <!-- Add more table rows as needed -->
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

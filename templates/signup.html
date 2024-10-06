@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+<head>
+    {% block css %}../static/signup.css{% endblock css %}
+    {% block title %}SIGNUP{% endblock title %}
+</head>
+<body>
+    {% block body %}
+    <div class="form">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <h1>Welcome to E-Waste</h1>
+            <p>Welcome back! Please enter your details here</p>
+            <br>
+            <label for="">User name</label>
+            <br>
+            <input type="text" placeholder="username" name = "Full_Name">
+            <br><br>
+            <label for="">Email</label>
+            <br>
+            <input type="text" placeholder="email" name = "Email">
+            <br><br>
+            <label for="">Password</label>
+            <br>
+            <input type="password" placeholder="password" name="Password">
+            <br><br>
+            <label for="">Password</label>
+            <br>
+            <input type="password" placeholder="confirm password" name="confirm_Password">
+            <br><br>
+            <label for="">UserType</label>
+            <br>
+            <select name="type" id="user-type">
+                <option value="" selected>--Select Type--</option>
+                <option value="user" name="user">User</option>
+                <option value="staff" name="staff">Recycler</option>
+            </select>
+            <br>
+            <span>
+                <span class="left">
+                    <input type="checkbox" style="width: 20px;"> <label for="">show password</label>
+                </span>
+                <span class="right">
+                    <a href="">Forget password?</a>
+                </span>
+            </span>
+            <input type="submit" value="Signup" id="signup-btn">
+            <p>don't have account? Let's create one</p>
+            <span id="login-btn">
+                <a href="{% url "login" %}" >Login</a>
+            </span>
+        </form>
+    </div>
+    {% endblock body %}
+</body>
