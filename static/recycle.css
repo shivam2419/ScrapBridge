@@ -1,0 +1,59 @@
+.recycle-container{
+    padding: 0 5%;
+}
+.recycle-container h1{
+    font-size: 28px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: blue;
+}
+.row-1, .row-2{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+#card{
+    box-shadow: 1px 1px 5px 1px gray;
+    width: 300px;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+.img{
+    text-align: center;
+}
+.row-1 div img, .row-2 div img{
+    height: 100px;
+    width: 100px;
+}
+.row-1 div h3, .row-2 div h3{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 10px;
+}
+.row-1 div p, .row-2 div p{
+    margin-bottom: 20px;
+}
+.row-1 div a, .row-2 div a{
+    background-color: blue;
+    padding: 8px;
+    width: 100px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.row-1 div a:hover, .row-2 div a:hover{
+    background-color: black;
+    color: white;
+}
+@media screen and (max-width: 540px) {
+    .recycle-container{
+        padding: 1% ;
+    }
+    .row-1, .row-2{
+        display: block;
+    }  
+    #card{
+        width: auto;
+        margin: 20px;
+    }
+}

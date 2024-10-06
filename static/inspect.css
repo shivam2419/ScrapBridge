@@ -1,0 +1,76 @@
+.container{
+    display: flex;
+    justify-content: space-around;
+}
+.container .user{
+    text-align: center;
+}
+.container .user img{
+    height: 80px;
+    border-radius: 50%;
+}
+.container_form{
+    margin: 2%;
+    width: 400px;
+    box-shadow: 1px 1px 10px 1px gray;
+    padding: 3%;
+    margin-top: 3%;
+}
+.container_form table{
+    width: 100%;
+}
+.container_form table th{
+    background-color: blue;
+    padding: 8px;
+    color: white;
+}
+.container_form table td:last-child{
+    border-left: 1px solid gray;
+}
+.container_form table td{
+    padding: 5px;
+    border-bottom: 1px solid gray;
+}
+.container_form a img{
+    height: 40px;
+    border-radius: 50%;
+    margin-bottom: -15px;
+}
+.container_form button label{
+    margin-top: -10px;
+    margin-right: 5px;
+}
+.container_form button{
+    background-color: white;
+    line-height: 50px;
+    border: none;
+    margin-right: 10px;
+}
+#mapid {
+    margin: 2%;
+    height: 700px; /* Set desired height */
+    width: 100%; /* Set to full width */
+}
+#myModal{
+    display: none;
+    text-align: center;
+    margin-top: 30px;
+}
+#modalImage{
+    margin: auto;
+    border: 2px solid gray;
+}
+#closeBtn{
+    background-color: black;
+    color: white;
+    padding: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    top: 0;
+}
+@media screen and (max-width: 800px) {
+    .container {
+        width: auto;
+        margin: 4%;
+    }
+}
