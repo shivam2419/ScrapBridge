@@ -1,1 +1,2 @@
-# Ewaste
+# ScrapBridge
+assests folder not updated
