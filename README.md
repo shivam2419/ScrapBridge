@@ -83,6 +83,11 @@ npm run dev
 
 *Frontend will be available at http://localhost:5173/ and backend at http://localhost:8000/.*
 
-**🤝 Contribution**
+**SCALING & OPTIMIZATION**
+1. Added Indexes in databases using db_index and meta.indexes
+2. Not using select_related (to avoid N+1 queries) because Using select_related will not save time — in fact, it may slow down the query due to the unnecessary JOIN, as we are accessing related data only once like abc.def (eg. organisation.user or owner.user) not in a loop.
+3. Used celery and redis for mail and ML service to work in background, use flower to get information of all background tasks.
+4. Used concept of lazy loading for the components that are used less.
 
-Fork this repo, make your changes, and submit a pull request. Let’s build green tech together 🌏
+**🤝 Contribution**
+*Fork this repo, make your changes, and submit a pull request. Let’s build green tech together 🌏*
