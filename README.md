@@ -3,6 +3,7 @@
 **ScrapBridge** is a full-stack web platform that connects households with certified scrap collectors. It simplifies the recycling process by allowing users to schedule pickups, classify scrap using AI, and track live scrap pricing.
 
 🔗 [📽️ Platform Demo](https://drive.google.com/file/d/1bkjLHavZuKS4tNPbYORWf5RfANMBBmTS/view?usp=sharing)
+[LIVE : ](https://scrapbridge.vercel.app/)
 
 ---
 
