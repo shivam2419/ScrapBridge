@@ -4,7 +4,7 @@
 
 🔗 [📽️ Platform Demo](https://drive.google.com/file/d/1bkjLHavZuKS4tNPbYORWf5RfANMBBmTS/view?usp=sharing)
 </br>
-[LIVE - Scrapbridge.vercel.app](https://scrapbridge.vercel.app/)
+🛑 [LIVE - Scrapbridge.vercel.app](https://scrapbridge.vercel.app/)
 
 ---
 
