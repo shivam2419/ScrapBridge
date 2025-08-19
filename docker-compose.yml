@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./Scrapbridge-backend/EWaste
+      dockerfile: Dockerfile
+    volumes:
+      - ./Scrapbridge-backend/EWaste:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - frontend
+
+  frontend:
+    build:
+      context: ./Scrapbridge-frontend/frontend
+      dockerfile: frontend.Dockerfile
+    ports:
+      - "3000:80"

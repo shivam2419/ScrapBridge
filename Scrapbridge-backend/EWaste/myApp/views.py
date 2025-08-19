@@ -17,7 +17,11 @@ from EWaste.settings import RAZORPAY_API_KEY, RAZORPAY_API_SECRET_KEY
 from rest_framework_simplejwt.token_blacklist.models import OutstandingToken
 from django.core.exceptions import ObjectDoesNotExist
 import requests
-from myApp.tasks import send_mail_via_brevo, get_ml_prediction_from_hf
+from myApp.tasks import send_mail_via_brevo
+from rest_framework.pagination import PageNumberPagination
+from django.core.cache import cache
+
+
 BREVO_API_KEY = config('BREVO_API_KEY')
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -336,15 +340,36 @@ def update_user(request, user_id):
         return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # All owners detail : Takes nothing : returns all the owner available
+class OwnerPagination(PageNumberPagination):
+    page_size = 50  # adjust as needed
+
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def getOwnerDetails(request):
     try:
-        owner = Owner.objects.all()
-        serializer = OwnerSerializer(owner, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    except:
-        return Response({'Error':'Some error occured'}, status=status.HTTP_404_NOT_FOUND)
+        # Make cache key based on page number (so each page has separate cache)
+        page_number = request.GET.get("page", 1)
+        cache_key = f"owners_page_{page_number}"
+
+        # Try cache first
+        cached_data = cache.get(cache_key)
+        if cached_data:
+            return Response(cached_data, status=status.HTTP_200_OK)
+
+        # If not cached, fetch from DB
+        owners = Owner.objects.all()
+        paginator = OwnerPagination()
+        result_page = paginator.paginate_queryset(owners, request)
+        serializer = OwnerSerializer(result_page, many=True)
+
+        response = paginator.get_paginated_response(serializer.data)
+
+        # Cache the full response data
+        cache.set(cache_key, response.data, timeout=60*5)  # cache for 5 min
+
+        return response
+    except Exception as e:
+        return Response({'Error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # All users detail : Takes nothing : returns all the user available (not needed API, gonna kill)
 @api_view(['GET'])
