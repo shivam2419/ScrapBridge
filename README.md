@@ -19,6 +19,7 @@
 - 📦 Scrap Collector Dashboard for Order Management
 - 🔄 Background Tasks via Celery + Redis
 - 📬 Email Notifications (via Brevo)
+- ⚡ Fast data access using Caching (Redis) and DB Indexing. (PostgreSQL)
 
 ---
 
@@ -35,13 +36,13 @@ Managing household scrap can be confusing and inefficient. **ScrapBridge** aims 
 
 | Frontend | Backend | Machine Learning | Tools & APIs |
 |----------|---------|------------------|--------------|
-| React.js | Django (REST Framework) | TensorFlow/Keras (CNN) | Leaflet.js, Razorpay, RapidAPI, SQLite, Brevo, Cloudinary |
+| React.js | Django (REST Framework) | TensorFlow/Keras (CNN) | Leaflet.js, Razorpay, RapidAPI, PostgreSQL, Brevo, Cloudinary | Redis, Docker
 
 ---
 
 ## 🚀 How to Run Locally
 
-> ✨ **Prerequisite:** Install Python, Node.js, Redis, and Git
+> ✨ **Prerequisite:** Install Python, Node.js, Redis, Git and PostgreSQL
 
 ### 🔧 Backend (Django)
 
